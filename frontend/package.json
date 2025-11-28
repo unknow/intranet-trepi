@@ -37,6 +37,19 @@
     "@plone/registry": "workspace:*",
     "volto-trepi-intranet": "workspace:*"
   },
+  "ignoredBuiltDependencies": [
+    "@parcel/watcher"
+  ],
+  "onlyBuiltDependencies": [
+    "core-js",
+    "core-js-pure",
+    "cypress",
+    "es5-ext",
+    "esbuild",
+    "full-icu",
+    "lightningcss-cli",
+    "unrs-resolver"
+  ],
   "devDependencies": {
     "mrs-developer": "^2.2.0"
   },
