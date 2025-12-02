@@ -21,7 +21,7 @@ const Endereco: React.FC<EnderecoProps> = ({ content }) => {
       </Container>
       <Container className="estado">
         <span className="label">Estado</span>:{' '}
-        <span className="value">{estado}</span>
+        <span className="value">{estado.token}</span>
       </Container>
       <Container className="cidade">
         <span className="label">Cidade</span>:{' '}

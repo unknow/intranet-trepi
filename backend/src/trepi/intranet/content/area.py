@@ -56,9 +56,10 @@ class IArea(model.Schema):
         required=False,
     )
 
-    estado = schema.TextLine(
+    estado = schema.Choice(
         title=_("Estado"),
         description=_("Informe a Estado do contato"),
+        vocabulary="trepi.intranet.vocabulary.estados",
         required=False,
     )
 
