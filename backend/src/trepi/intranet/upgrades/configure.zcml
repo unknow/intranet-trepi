@@ -3,24 +3,20 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     >
 
-  <!-- Example upgrade step
   <genericsetup:upgradeSteps
       profile="trepi.intranet:default"
       source="1000"
-      destination="1001"
+      destination="20251127001"
       >
     <genericsetup:upgradeDepends
-        title="Update registry value"
+        title="Altera timezone para America/Sao_Paulo"
         import_steps="plone.app.registry"
         />
   </genericsetup:upgradeSteps>
-  -->
-
-  <!-- -*- extra stuff goes here -*- -->
 
   <genericsetup:upgradeSteps
       profile="trepi.intranet:default"
-      source="1000"
+      source="20251127001"
       destination="20251128001"
       >
     <genericsetup:upgradeDepends
@@ -45,6 +41,17 @@
     <genericsetup:upgradeDepends
         title="Aplica permissionamento para tipo de conteúdo Área"
         import_steps="rolemap"
+        />
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
+      profile="trepi.intranet:default"
+      source="20251128002"
+      destination="20251202001"
+      >
+    <genericsetup:upgradeDepends
+        title="Adiciona behaviors ao tipo Área"
+        import_steps="typeinfo"
         />
   </genericsetup:upgradeSteps>
 
