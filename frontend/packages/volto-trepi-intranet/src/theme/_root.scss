@@ -40,7 +40,21 @@ a {
   padding: $spacing-small;
   border: 2px solid;
   border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: var(--secondary-color);
+  color: var(--secondary-foreground-color);
+
   .label {
     @include body-text-bold();
+  }
+
+  .titulo {
+    padding: 10px;
+    font-size: 30pt;
+    font-weight: bold;
+  }
+
+  .descricao {
+    padding: 10px;
   }
 }
