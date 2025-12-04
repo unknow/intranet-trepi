@@ -3,6 +3,8 @@ from plone import api
 from plone.dexterity.fti import DexterityFTI
 from trepi.intranet.content.area import Area
 from zope.component import createObject
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 import pytest
 
@@ -95,4 +97,17 @@ class TestArea:
             payload = deepcopy(area_payload)
             payload["description"] = ""
             area = api.content.create(container=container, **payload)
+        assert area.exclude_from_nav is True
+
+    def test_subscriber_modify_remove_description_value(self, area_payload):
+        from copy import deepcopy
+
+        container = self.portal
+        with api.env.adopt_roles(["Manager"]):
+            payload = deepcopy(area_payload)
+            area = api.content.create(container=container, **payload)
+            area.description = ""
+            area.reindexObject()
+            # Area é o objeto que foi modificado
+            notify(ObjectModifiedEvent(area))
         assert area.exclude_from_nav is True
