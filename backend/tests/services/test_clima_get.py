@@ -1,4 +1,5 @@
 from pathlib import Path
+from plone import api
 from Products.CMFPlone.Portal import PloneSite
 
 import json
@@ -30,6 +31,13 @@ class TestServiceClimaGet:
     @pytest.fixture(autouse=True)
     def _setup(self, portal, patch_openmeteo):
         self.portal = portal
+        with api.env.adopt_roles(["Manager"]):
+            self.document = api.content.create(
+                container=portal,
+                type="Document",
+                id="colaboradores",
+                title="Pasta de Colaboradores",
+            )
         self.endpoint = "/@clima"
 
     def test_get_status_code(self, manager_request):
@@ -49,3 +57,14 @@ class TestServiceClimaGet:
         response = manager_request.get(self.endpoint)
         data = response.json()
         assert (key in data) is expected
+
+    def test_fails_anon_user(self, anon_request):
+        """Usuário anônimo não deve ter acesso ao serviço de clima."""
+        response = anon_request.get(self.endpoint)
+        assert response.status_code == 401
+
+    def test_only_accessible_on_root(self, manager_request):
+        """Usuário anônimo não deve ter acesso ao serviço de clima."""
+        url = f"/colaboradores{self.endpoint}"
+        response = manager_request.get(url)
+        assert response.status_code == 404
