@@ -1,5 +1,6 @@
 from trepi.intranet import logger
 from trepi.intranet.content.area import Area
+from zope.interface.interfaces import IObjectEvent
 from zope.lifecycleevent import IObjectModifiedEvent
 from zope.lifecycleevent import ObjectAddedEvent
 
@@ -19,3 +20,8 @@ def added(obj: Area, event: ObjectAddedEvent):
 def modified(obj: Area, event: IObjectModifiedEvent):
     """Post creation handler for Area."""
     _update_excluded_from_nav(obj)
+
+
+def all_events(event: IObjectEvent):
+    """Logar eventos."""
+    logger.debug(f"Nome do evento: {event.__class__.__name__}")

@@ -12,4 +12,9 @@
       handler=".area.modified"
       />
 
+  <subscriber
+      for="zope.interface.interfaces.IObjectEvent"
+      handler=".area.all_events"
+      />
+
 </configure>
